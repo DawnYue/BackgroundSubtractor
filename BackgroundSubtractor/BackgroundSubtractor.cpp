@@ -15,12 +15,8 @@ using namespace cv;
 
 int main()
 {
-	//读取视频
-	//VideoCapture capVideo("E:\\1\\2.MP4");
 	VideoCapture capVideo(0);
-
-	//打开失败
-	if (!capVideo.isOpened()) {
+	if (!capVideo.isOpened()) {//打开失败
 		std::cout << "can not open" << std::endl;
 		return -1;
 	}
@@ -32,17 +28,15 @@ int main()
 	Mat bny_subMat;
 	Mat bgModelMat;
 
-	while (1) {
+	while(1){
 		capVideo >> frame;
 		cvtColor(frame, frame, COLOR_BGR2GRAY);
-		if (cnt == 0) {
-			//第一帧，获得背景图像
+		if (cnt == 0) {//获得背景图像
 			frame.copyTo(bgMat);
 		}
-		else {
-			//第二帧,背景差分
+		else {//背景差分
 			absdiff(frame, bgMat, subMat);//背景图像和当前图像相减		
-			threshold(subMat, bny_subMat, 20, 255, CV_THRESH_BINARY);//结果二值化
+			threshold(subMat, bny_subMat, 20, 255, CV_THRESH_BINARY);//二值化
 
 			imshow("b_subMat", bny_subMat);
 			imshow("frame", frame);
