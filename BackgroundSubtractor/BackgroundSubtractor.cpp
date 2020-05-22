@@ -13,21 +13,19 @@
 using namespace std;
 using namespace cv;
 
-int bgSub_demo()
+int main()
 {
-
-	//----------------------读取视频文件--------------------------
+	//读取视频
 	//VideoCapture capVideo("E:\\1\\2.MP4");
 	VideoCapture capVideo(0);
 
-	//如果视频打开失败
+	//打开失败
 	if (!capVideo.isOpened()) {
-		std::cout << "Unable to open video!" << std::endl;
+		std::cout << "can not open" << std::endl;
 		return -1;
 	}
 
-	//计数器
-	int cnt = 0;
+	int cnt = 0;//计数器
 	Mat frame;
 	Mat bgMat;
 	Mat subMat;
@@ -42,34 +40,15 @@ int bgSub_demo()
 			frame.copyTo(bgMat);
 		}
 		else {
-			//第二帧开始背景差分
-			//背景图像和当前图像相减
-			absdiff(frame, bgMat, subMat);
-			//差分结果二值化
-			threshold(subMat, bny_subMat, 20, 255, CV_THRESH_BINARY);
+			//第二帧,背景差分
+			absdiff(frame, bgMat, subMat);//背景图像和当前图像相减		
+			threshold(subMat, bny_subMat, 20, 255, CV_THRESH_BINARY);//结果二值化
 
 			imshow("b_subMat", bny_subMat);
 			imshow("frame", frame);
 			waitKey(30);
 		}
 		cnt++;
-
 	}
-	return 0;
-}
-
-int main()
-{
-	//开始计时
-	double start = static_cast<double>(cvGetTickCount());
-
-	bgSub_demo();
-
-	//结束计时
-	double time = ((double)cvGetTickCount() - start) / cvGetTickFrequency();
-	//显示时间
-	cout << "processing time:" << time / 1000 << "ms" << endl;
-	//等待键盘响应，按任意键结束程序
-	system("pause");
 	return 0;
 }
