@@ -8,7 +8,6 @@
 #include<math.h>
 #include <vector>
 #include "cv.h"
-
 //练习2
 using namespace std;
 using namespace cv;
