@@ -13,5 +13,6 @@ opencv简单实践12：背景差分、高斯建模以及验证视频像素变换
 
 老师代码：
 https://github.com/lizhu1126/dip-class-demos/blob/feature12.bgSub/dip-class-demos/funtions.cpp
+
 我的代码：
 https://github.com/DawnYue/BackgroundSubtractor
